@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="AWS,Docker,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Brotherjing">
-<meta property="og:url" content="http://brotherjing.github.io/index.html">
+<meta name="description" content="BackgroundAfter moving our product towards serverless architecture, our daily development now heavily relies on AWS. For local debugging, we use aws-sam-cli to run Lambda in Docker and then use remote">
+<meta name="keywords" content="AWS,Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solving a problem about AWS SAM and Docker">
+<meta property="og:url" content="http://brotherjing.github.io/2018/10/28/docker/index.html">
 <meta property="og:site_name" content="Brotherjing">
+<meta property="og:description" content="BackgroundAfter moving our product towards serverless architecture, our daily development now heavily relies on AWS. For local debugging, we use aws-sam-cli to run Lambda in Docker and then use remote">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-28T14:03:21.538Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Brotherjing">
+<meta name="twitter:title" content="Solving a problem about AWS SAM and Docker">
+<meta name="twitter:description" content="BackgroundAfter moving our product towards serverless architecture, our daily development now heavily relies on AWS. For local debugging, we use aws-sam-cli to run Lambda in Docker and then use remote">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://brotherjing.github.io/">
+  <link rel="canonical" href="http://brotherjing.github.io/2018/10/28/docker/">
 
 
 
 
 
-  <title>Brotherjing</title>
+  <title>Solving a problem about AWS SAM and Docker | Brotherjing</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -214,9 +218,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/28/docker/" itemprop="url">Solving a problem about AWS SAM and Docker</a></h1>
+          <h1 class="post-title" itemprop="name headline">Solving a problem about AWS SAM and Docker</h1>
         
 
         <div class="post-meta">
@@ -298,9 +300,7 @@
       
 
       
-        
-          
-            <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>After moving our product towards serverless architecture, our daily development now heavily relies on AWS. For local debugging, we use <a href="https://github.com/awslabs/aws-sam-cli" target="_blank" rel="noopener">aws-sam-cli</a> to run Lambda in Docker and then use remote debugging feature of our IDE, which allows us to set breakpoints.</p>
+        <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>After moving our product towards serverless architecture, our daily development now heavily relies on AWS. For local debugging, we use <a href="https://github.com/awslabs/aws-sam-cli" target="_blank" rel="noopener">aws-sam-cli</a> to run Lambda in Docker and then use remote debugging feature of our IDE, which allows us to set breakpoints.</p>
 <p>However on some of my colleagues’ machine, when a Docker container is started, it fails immediately and prints the following message:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error while loading shared libraries: libjli.so: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p>
 <p>Since it’ll be very inconvenient if we can’t locally debug Lambda, I decided to investigate the issue.</p>
 <h2 id="A-first-attempt"><a href="#A-first-attempt" class="headerlink" title="A first attempt"></a>A first attempt</h2><p>After checking the SAM version and Docker version are same as mine, I realize there’s not a trivial solution. Since I don’t know much about Docker, I started by googling the error message.</p>
@@ -320,8 +320,6 @@
 <p>This will commit a docker container as a image. We can run an image, do some modification and commit it back to the image.</p>
 <p>But if you just want to modify the Dockerfile and overwrite an existing image, just run<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t lambci/lambda:java .</span><br></pre></td></tr></table></figure></p>
 
-          
-        
       
     </div>
     
@@ -336,14 +334,22 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/AWS/" rel="tag"># AWS</a>
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -353,10 +359,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +371,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -384,8 +395,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -447,6 +467,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-first-attempt"><span class="nav-number">2.</span> <span class="nav-text">A first attempt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-second-attempt"><span class="nav-number">3.</span> <span class="nav-text">A second attempt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Another-solution"><span class="nav-number">4.</span> <span class="nav-text">Another solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-useful-command"><span class="nav-number">5.</span> <span class="nav-text">Some useful command</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -587,6 +623,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
